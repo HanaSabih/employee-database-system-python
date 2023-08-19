@@ -8,3 +8,14 @@ class Single_Employee:
 
 
 
+def read_employees_data_file():
+    f = open("employees_data.txt", "r")
+    employees = {}
+    for x in f:
+        employee_id, username, timestamp, gender, salary = x.split(', ')
+        employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
+    # print(employees)
+    return employees
+  
+read_employees_data_file()
+
