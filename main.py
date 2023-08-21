@@ -45,17 +45,15 @@ class Empolyees_Data():
         self.employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
         print(f"the new employee {username} was added succefully")
 
+    def display_all_employees(self):
+        employees_date_sorted = sorted(self.employees.values(), key=lambda employee: employee.timestamp)
+        for employee in employees_date_sorted:
+            print(f"Employee ID: {employee.employee_id}, Username: {employee.username}, Join Date: {employee.timestamp}, Gender: {employee.gender}, Salary: {employee.salary}")
 
 
-Empolyees_Data().add_single_employee()   
-# output ---> 
-# Enter the username:wrferf
-# Enter the gender:weferf
-# Enter the salary:2551
-# the new employee wrferf was added succefully
 
-# Empolyees_Data().male_female_statistics()   
-# output ====>> there is: 1 Male Employees, and 1 Female Employees
+Empolyees_Data().display_all_employees()   
+
  
 
 
