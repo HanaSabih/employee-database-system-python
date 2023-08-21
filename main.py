@@ -1,3 +1,5 @@
+import datetime
+
 class Single_Employee:
     def __init__(self, employee_id, username, timestamp, gender, salary):
         self.employee_id = employee_id
@@ -32,9 +34,27 @@ class Empolyees_Data():
                 count_male +=1
         print(f'there is: {count_male} Male Employees, and {count_female} Female Employees')
 
+    
+    def add_single_employee(self):
+        employee_id = f"emp{len(self.employees)+1:03}"
+        # print(employee_id)
+        timestamp = datetime.datetime.now().strftime('%Y%m%d')
+        username = input("Enter the username:")      
+        gender = input("Enter the gender:")
+        salary = input("Enter the salary:")
+        self.employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
+        print(f"the new employee {username} was added succefully")
 
 
-Empolyees_Data().male_female_statistics()   
+
+Empolyees_Data().add_single_employee()   
+# output ---> 
+# Enter the username:wrferf
+# Enter the gender:weferf
+# Enter the salary:2551
+# the new employee wrferf was added succefully
+
+# Empolyees_Data().male_female_statistics()   
 # output ====>> there is: 1 Male Employees, and 1 Female Employees
  
 
