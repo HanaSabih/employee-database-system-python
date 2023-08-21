@@ -7,31 +7,37 @@ class Single_Employee:
         self.salary = salary
 
 
-# o(n) => n =the number of lines
-def read_employees_data_file():
-    f = open("employees_data.txt", "r")
-    employees = {}
-    for x in f:
-        employee_id, username, timestamp, gender, salary = x.split(', ')
-        employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
-    # print(employees)
-    return employees
-  
-read_employees_data_file()
+
+class Empolyees_Data():
+    def __init__(self):
+        self.employees = {}
+        self.read_employees_data_file()
+
+
+    # o(n) => n =the number of lines
+    def read_employees_data_file(self):
+        f = open("employees_data.txt", "r")
+        for x in f:
+            employee_id, username, timestamp, gender, salary = x.split(', ')
+            self.employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
+            
+
+
+
 
 
 def display_menu():
-    read_employees_data_file()
-    for i in range (5):
-        print("\nWelcome to the Employee Database System")
+    all_data = Empolyees_Data()
+    print("\nWelcome to the Employee Database System")
+
+    for i in range (5):       
         user_name = input("Enter username:") 
         user_password = input("Enter password:")
-
-    
+   
         if user_name == "admin" and user_password == "admin123123":
-
             print("it is admin")
             break
+
         elif user_name == "manuella":
             print("it is normal user")
             break
@@ -43,3 +49,4 @@ def display_menu():
             print("Sorry you are blocked ,you have reached all the trials")
 
 display_menu()
+
