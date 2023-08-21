@@ -35,15 +35,42 @@ def display_menu():
         user_password = input("Enter password:")
    
         if user_name == "admin" and user_password == "admin123123":
-            print("it is admin")
-            break
+            while True:
+                print("\nThe admin menu:")
+                print("1 -> Display female and male statistics")
+                print("2 -> Add a single employee")
+                print("3 -> Display all the employees")
+                print("4 -> Change a specific employee Salary")
+                print("5 -> Remove a specific employee")
+                print("6 -> Raise a specific employee's Salary")
+                print("7 -> Exit")
+
+                choice_number = input("Please enter your choice: ")
+
+                if choice_number == "1":
+                    print("you choose 1")
+                elif choice_number == "2":
+                    print("you choose 2")
+                elif choice_number == "3":
+                    print("you choose 3")
+                elif choice_number == "4":
+                    print("you choose 4")
+                elif choice_number == "5":
+                    print("you choose 5")
+                elif choice_number == "6":
+                    print("you choose 6")
+                elif choice_number == "7":
+                    print("you choose 7")
+                    break
+                else:
+                    print("invalid number, please try again")
 
         elif user_name == "manuella":
             print("it is normal user")
             break
    
     
-        if i< 4:
+        elif i< 4:
             print(f"Incorrect Username and/or Password. you still have {4-i} trial")
         else:
             print("Sorry you are blocked ,you have reached all the trials")
