@@ -21,12 +21,14 @@ class Empolyees_Data():
         f = open("employees_data.txt", "r")
         for x in f:
             employee_id, username, timestamp, gender, salary = x.split(', ')
-            self.employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(salary))
+            self.employees[employee_id] = Single_Employee(employee_id, username, timestamp, gender, int(float(salary)))
 
     def save_employees_to_data(self):
         f = open("employees_data.txt", "w")
         for employee_id, employee in self.employees.items():
             f.write(f"{employee.employee_id}, {employee.username}, {employee.timestamp}, {employee.gender}, {employee.salary}\n")
+
+
             
     # o(n) =>n is the numbers of employees
     def male_female_statistics(self):
@@ -70,22 +72,20 @@ class Empolyees_Data():
             del self.employees[employee_id]
             print("Employee removed successfully!")
         else:
-            print("Employee not found.")
+            print("the Employee id  not found.")
 
-        
+    def raise_employee_salary(self):
+        employee_id = input("Enter the employee ID for the salary raise: ")
+        salary_raise_percentage = float(input("Enter the raise percentage (e.g., 1.05): "))
+        if employee_id in self.employees:
+            self.employees[employee_id].salary *= salary_raise_percentage
+            print("the employee Salary raised successfully!")
+        else:
+            print("the Employee id not found.")
+
+
 
          
-
-
-
-
-
- 
-
-
-
-
-
 
 def display_menu():
     all_data = Empolyees_Data()
@@ -126,15 +126,34 @@ def display_menu():
                 else:
                     print("invalid number, please try again")
 
-        elif user_name == "manuella":
-            print("it is normal user")
-            break
-   
-    
-        elif i< 4:
-            print(f"Incorrect Username and/or Password. you still have {4-i} trial")
+        elif  user_name in all_data.employees and user_password == "":
+            while True:
+                if all_data.employees[user_name].gender == "male":
+                    print(f"\nHi Mr. {all_data.employees[user_name].username}")
+                else:
+                    print(f"\nHi Ms. {all_data.employees[user_name].username}")
+                
+                print("the Normal user menu:")
+                print("1 -> Check my Salary")
+                print("2 -> Exit")
+
+                choice_number = input("Please enter your choice: ")
+
+                if choice_number == "1":
+                    print(f"Your salary is: {all_data.employees[user_name].salary}")
+                elif choice_number == "2":
+                    with open("timestamp.txt", "a") as f:
+                        timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                        f.write(f"{all_data.employees[user_name].username} logged out at {timestamp}\n")
+                    break
+                else:
+                    print("put a valid number, please try again")
         else:
-            print("Sorry you are blocked ,you have reached all the trials")
+            if i < 4:
+                print(f"it seems Incorrect Username and/or Password. You still have {4-i} trials.")
+            else:
+                print("Sorry, you are blocked. You have reached all the trials.")
 
 display_menu()
+
 
